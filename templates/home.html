@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Adoption Agency{% endblock %}</title>
+</head>
+
+<body>
+  <div class="row">
+    <a href="#">Add a Pet</a>
+    <a href="#">View Animals</a>
+  </div>
+  {% block content %}
+  <h2>Our Adoptable Animals</h2>
+  <p>This is a list of all of the animals we have available for adoption. If you want to learn more about a potential
+    friend, click on their name or photo!</p>
+  <hr>
+  {% if pets %}
+  <div class="row">
+    {% for pet in pets %}
+    <div class="column">
+      <a href="#">
+        <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}">
+        <h3>{{pet.name}}</h3>
+        {% if pet.available %}
+        <div><b>Available</b> for adoption!</div>
+        {% else %}
+        <div>Not available at this time.</div>
+        {% endif %}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  {% endblock %}
+</body>
+
+</html>
