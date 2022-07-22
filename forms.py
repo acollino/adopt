@@ -11,7 +11,7 @@ class AddPetForm(FlaskForm):
     """Form for adding a pet to the adoption agency."""
 
     name = StringField("Name", validators=[InputRequired()])
-    species = StringField("Species", validators=[AnyOf("cat", "dog", "porcupine"), InputRequired()])
+    species = StringField("Species", validators=[AnyOf(["cat", "dog", "porcupine"]), InputRequired()])
     photo_url = URLField("Photo URL", validators=[Optional(), URL()])
     age = IntegerField("Pet Age", validators=[Optional(), NumberRange(min=0, max=30)])
     notes = TextAreaField("Notes", validators=[Optional()])
@@ -21,4 +21,4 @@ class EditPetForm(FlaskForm):
 
     photo_url = URLField("Photo URL", validators=[Optional(), URL()])
     notes = TextAreaField("Notes", validators=[Optional()])
-    available = BooleanField("Available for Adoption", Optional())
+    available = BooleanField("Available for Adoption", validators=[Optional()])
