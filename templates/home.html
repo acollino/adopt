@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/style.css">
   <title>{% block title %}Adoption Agency{% endblock %}</title>
 </head>
 
@@ -16,17 +17,17 @@
   {% block content %}
   <h2>Our Adoptable Animals</h2>
   <p>This is a list of all of the animals we have available for adoption. If you want to learn more about a potential
-    friend, click on their name or photo!</p>
+    friend, click on them below!</p>
   <hr>
   {% if pets %}
   <div class="row">
     {% for pet in pets %}
     <div class="column">
-      <a href="#">
-        <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}">
+      <a href="/{{pet.id}}">
+        <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}" class="profile-picture">
         <h3>{{pet.name}}</h3>
         {% if pet.available %}
-        <div><b>Available</b> for adoption!</div>
+        <div><span class="bold">Available</span> for adoption!</div>
         {% else %}
         <div>Not available at this time.</div>
         {% endif %}

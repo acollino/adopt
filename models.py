@@ -23,3 +23,9 @@ class Pet(db.Model):
     def summary(self):
         """Returns a brief summary of the pet"""
         return f"{self.name}, the {self.species}"
+    
+    def avail_details(self):
+        if self.available:
+            return f"{self.name} is available for adoption!"
+        else:
+            return f"{self.name} is not available for adoption at this time."
