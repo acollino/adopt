@@ -7,32 +7,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/style.css">
   <title>{% block title %}Adoption Agency{% endblock %}</title>
+  <link rel="icon" type="image/x-icon" href="static/assets/dog-and-cat.png">
 </head>
 
 <body>
-  <div class="row">
-    <a href="/add">Add a Pet</a>
-    <a href="/">View Animals</a>
+  <div class="row nav-bar">
+    <a href="/add" class="nav-bar-link">Add a Pet</a>
+    <a href="/">
+      <div class="column-small">
+        <img src="static/assets/dog-and-cat.png" class="home-logo"
+          alt="A dog and a cat sitting together in front of a heart.">
+        <span class="nav-bar-title">Pawssibly Perfect</span>
+      </div>
+    </a>
+    <a href="/" class="nav-bar-link">View Animals</a>
   </div>
   {% block content %}
-  <h2>Our Adoptable Animals</h2>
-  <p>This is a list of all of the animals we have available for adoption. If you want to learn more about a potential
-    friend, click on them below!</p>
+  <div class="padded-container width-50 centered">
+    <h2>Our Animals</h2>
+    <p>This is a list of all of the animals we have available for adoption. If you want to learn
+      more about a potential friend, click on them below!</p>
+  </div>
   <hr>
   {% if pets %}
-  <div class="row">
+  <div class="row home-row centered margin1-top-bot">
     {% for pet in pets %}
-    <div class="column">
-      <a href="/{{pet.id}}">
-        <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}" class="profile-picture">
-        <h3>{{pet.name}}</h3>
-        {% if pet.available %}
-        <div><span class="bold">Available</span> for adoption!</div>
-        {% else %}
-        <div>Not available at this time.</div>
-        {% endif %}
-      </a>
-    </div>
+    <a href="/{{pet.id}}" class="column border border-rounded margin-1">
+      <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}" class="profile-picture">
+      <h3>{{pet.name}}</h3>
+      {% if pet.available %}
+      <div><span class="bold">Available</span> for adoption!</div>
+      {% else %}
+      <div>Not available at this time.</div>
+      {% endif %}
+    </a>
     {% endfor %}
   </div>
   {% endif %}

@@ -15,6 +15,11 @@ app.debug = True
 
 connect_db(app)
 
+# https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg
+# https://cdn.pixabay.com/photo/2015/03/27/13/16/maine-coon-694730_960_720.jpg
+# https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg
+# https://cdn.pixabay.com/photo/2018/08/06/23/32/nature-3588682_960_720.jpg
+
 @app.before_first_request
 def setup_table():
     """Creates the Pets table before the page is first accessed."""
@@ -24,7 +29,7 @@ def setup_table():
 @app.route("/")
 def display_home_page():
     """Displays the Adoption Agency home page."""
-    pets = Pet.query.all()
+    pets = Pet.query.order_by(Pet.id).all()
     return render_template("home.html", pets=pets)
 
 @app.route("/add")
@@ -53,6 +58,7 @@ def display_pet_details(pet_id):
     """Display details about a pet."""
     pet = Pet.query.get_or_404(pet_id)
     form = EditPetForm(obj=pet)
+    form.photo_url.data = ""
     return render_template("pet_details.html", form=form, pet=pet)
 
 @app.route("/<int:pet_id>", methods=["POST"])
@@ -62,6 +68,8 @@ def edit_pet(pet_id):
     form = EditPetForm()
     pet = Pet.query.get_or_404(pet_id)
     if form.validate_on_submit():
+        if not form.photo_url.data:
+            form.photo_url.data = pet.photo_url
         form.populate_obj(pet)
         db.session.commit()
         return redirect("/")

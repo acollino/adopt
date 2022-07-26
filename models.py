@@ -14,7 +14,7 @@ class Pet(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     species = db.Column(db.Text, nullable=False)
-    photo_url= db.Column(db.Text)
+    photo_url= db.Column(db.Text, default="static/assets/paw-heart.png")
     age = db.Column(db.Integer)
     notes= db.Column(db.Text, nullable=False)
     available= db.Column(db.Boolean, nullable=False, default=True)
@@ -28,4 +28,4 @@ class Pet(db.Model):
         if self.available:
             return f"{self.name} is available for adoption!"
         else:
-            return f"{self.name} is not available for adoption at this time."
+            return f"{self.name} is not available for adoption."

@@ -1,12 +1,56 @@
-{{ form.hidden_tag() }}
-{% for field in form if field.widget.input_type != 'hidden' %}
-<div class="form-item">
-  {{ field.label }}
-  {{ field }}
+<!-- {{ form.hidden_tag() }}
+<div class="form-row">
+  <div class="form-column">
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    {{ field.label(class_="align-r form-flex-item") }}
+    {% endfor %}
+  </div>
+  <div class="form-column">
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    {{ field(class_="align-l form-flex-item") }}
+    {% endfor %}
+  </div>
+  <div class="form-column">
+    {% for field in form if field.widget.input_type != 'hidden' %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+        <div class="align-l form-flex-item">{{ error }}</div>
+        {% endfor %}
+      {% else %}
+        <div class="align-l form-flex-item">&nbsp;</div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<button class="centered button-green">Submit</button> -->
 
-  {% for error in field.errors %}
-  {{ error }}
+{{ form.hidden_tag() }}
+<div class="form-column">
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    {% if field.errors %}
+      <div class="form-row">
+        {{ field.label(class_="form-flex-item form-label form-error-color") }}
+        {% if field.type == "TextAreaField" %}
+        {{ field(class_="form-flex-item form-textarea") }}
+        {% else %}
+        {{ field(class_="form-flex-item") }}
+        {% endif %}
+      </div>
+      {% for error in field.errors %}
+      <div class="form-row">
+        <div class="align-l form-flex-item form-error-color form-error">{{ error }}</div>
+      </div>
+      {% endfor %}
+    {% else %}
+    <div class="form-row">
+      {{ field.label(class_="form-flex-item form-label") }}
+      {% if field.type == "TextAreaField" %}
+      {{ field(class_="form-flex-item form-textarea") }}
+      {% else %}
+      {{ field(class_="form-flex-item") }}
+      {% endif %}
+    </div>
+    {% endif %}
   {% endfor %}
 </div>
-{% endfor %}
-<button>Submit</button>
+<button class="centered button-green">Submit</button>
