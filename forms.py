@@ -6,7 +6,6 @@ from wtforms.validators import (
     URL,
     NumberRange,
     AnyOf,
-    ValidationError,
 )
 
 
@@ -18,8 +17,8 @@ class AddPetForm(FlaskForm):
     """Form for adding a pet to the adoption agency."""
 
     @classmethod
-    def filter_species(cls, str=""):
-        print(f"Input: {str}")
+    def title_string(cls, str=""):
+        """Returns a title-cased version of a truthy string."""
         if str:
             return str.title()
         else:
@@ -38,7 +37,7 @@ class AddPetForm(FlaskForm):
             ),
             InputRequired(message="The pet's species is required."),
         ],
-        filters=[lambda x: AddPetForm.filter_species(x)],
+        filters=[lambda str: AddPetForm.title_string(str)],
     )
     photo_url = URLField(
         "Photo URL",

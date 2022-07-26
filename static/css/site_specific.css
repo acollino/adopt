@@ -1,0 +1,112 @@
+@font-face {
+  font-family: Chewy;
+  src: url(/static/fonts/chewy_regular.ttf);
+}
+
+.nav-bar-title {
+  color: #D2E1C1;
+  font-weight: 100;
+  font-size: 2rem;
+  font-family: Chewy;
+  margin-bottom: 1rem;
+}
+
+.border {
+  border: #254626 3px solid;
+}
+
+.home-row {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 90%;
+}
+
+.home-row > a {
+  text-decoration: none;
+  color: black;
+}
+
+.home-row > a:hover {
+  background-color: #a5ac9b;
+}
+
+.home-logo {
+  height: 5rem;
+  margin-top: 1rem;
+}
+
+.column > a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-bar {
+  background-color: #254626;
+  justify-content: space-evenly;
+}
+
+.nav-bar > a {
+  text-decoration: none;
+  color: white;
+  font-family: Chewy;
+}
+
+.nav-bar-link {
+  font-size: 1.75rem;
+  padding: 1rem;
+}
+
+.nav-bar-link:hover {
+  background-color: #132514;
+}
+
+.profile-picture {
+  max-width: min(11.5rem, 23vw);
+  max-height: min(11.5rem, 23vw);
+  margin: 1rem 0;
+  display: block;
+  border-radius: 0.5rem;
+}
+
+.picture-larger {
+  max-width: min(25rem, 49vw);
+  max-height: min(25rem, 49vw);
+}
+
+.text-box {
+  font-family: inherit;
+  display: block;
+  width: min(30rem, 73vw);
+  height: 5rem;
+  font-size: 1rem;
+}
+
+.block-text {
+  font-size: .9rem;
+  max-width: min(45rem, 60vw);
+}
+
+.available-text {
+  max-width: 80%;
+  text-align: center;
+  display: inline-block;
+  padding-top: 1rem;
+}
+
+.form-label {
+  min-width: 4.7rem;
+}
+
+.form-textarea {
+  width: min(31.25rem, 56vw);
+  height: 4.125rem;
+  font-family: inherit;
+}
+
+.form-error {
+  text-align: center;
+}
+
+.form-error-color {
+  background-color: #ffa0a0;
+}

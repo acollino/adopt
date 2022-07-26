@@ -25,6 +25,7 @@ class Pet(db.Model):
         return f"{self.name}, the {self.species}"
     
     def avail_details(self):
+        """Returns a string describing this pet's adoption status."""
         if self.available:
             return f"{self.name} is available for adoption!"
         else:
