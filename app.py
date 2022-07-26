@@ -15,16 +15,18 @@ app.debug = True
 
 connect_db(app)
 
-# https://cdn.pixabay.com/photo/2017/02/20/18/03/cat-2083492_960_720.jpg
-# https://cdn.pixabay.com/photo/2015/03/27/13/16/maine-coon-694730_960_720.jpg
-# https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg
-# https://cdn.pixabay.com/photo/2018/08/06/23/32/nature-3588682_960_720.jpg
-
 @app.before_first_request
 def setup_table():
     """Creates the Pets table before the page is first accessed."""
     db.drop_all()
     db.create_all()
+    seed_pets = [Pet(name="Peanut", species="cat", photo_url="https://cdn.pixabay.com/photo/2015/01/31/12/36/cat-618470_960_720.jpg", age=1, notes="A bit skittish, but does well with other cats. Looking to be adopted into a multi-cat household!"),
+                  Pet(name="Mr. Sootpaws", species="cat", photo_url="https://cdn.pixabay.com/photo/2015/03/27/13/16/maine-coon-694730_960_720.jpg", age=4, notes="His favorite game is hunting socks...while you are wearing them!"),
+                  Pet(name="Einstein", species="dog", photo_url="https://cdn.pixabay.com/photo/2019/08/19/07/45/corgi-4415649_960_720.jpg", age=4, notes="Despite his name, Einstein isn't all that bright. But this doofus is still full of love and would love to join your family!"),
+                  Pet(name="Penelope", species="porcupine", photo_url="https://cdn.pixabay.com/photo/2018/08/06/23/32/nature-3588682_960_720.jpg", notes="Careful, she's a hugger! Awaiting transfer to a local zoo; porcupines do not do well as house pets.", available=False), 
+                  Pet(name="Lola", species="dog", photo_url="https://cdn.pixabay.com/photo/2017/12/29/10/47/animal-company-3047244_960_720.jpg", age=3, notes="Lola has loads of energy, loves to run, and has a knack for escaping enclosures if she's bored. Looking for an active family!")]
+    db.session.add_all(seed_pets)
+    db.session.commit()
 
 @app.route("/")
 def display_home_page():
