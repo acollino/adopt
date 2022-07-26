@@ -2,28 +2,35 @@
 {% block title %}{{pet.name}} Details{% endblock %}
 
 {% block content %}
-  <div class="column">
-    <h2>Pet Details</h2>
-    <div class="row">
-      <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}" class="profile-picture">
-      <div class="column">
+  <div class="column centered border border-rounded margin1-top-bot">
+    <div class="title-section">Pet Details</div>
+    <div class="row align-top space-evenly">
+      <img src="{{pet.photo_url}}" alt="Photo of {{pet.summary}}" class="profile-picture picture-larger">
+      <div class="">
         <h3>{{pet.name}}</h3>
         <div>Species: {{pet.species}}</div>
         {% if pet.age %}
         <div>Age: {{pet.age}}</div>
         {% endif %}
+        <div class="available-text">
+          {{pet.avail_details()}}
+        </div>
       </div>
     </div>
-    <div>{{pet.avail_details()}}</div>
+    <hr>
     {% if pet.notes %}
-    <h4>Notes on {{pet.name}}:</h4>
-    <div class="block-text">
+    <div class="bold">Notes on {{pet.name}}:</div>
+    <div class="block-text margin1-top-bot">
       {{pet.notes}}
     </div>
     {% endif %}
-    <h3>Edit Info:</h2>
-    <form method="POST">
-      {% include "form_contents.html" %}
-    </form>
+    <details>
+      <summary>
+        <span>Edit Pet Info:</span>
+      </summary>
+      <form method="POST">
+        {% include "form_contents.html" %}
+      </form>
+    </details>
   </div>
 {% endblock %}
